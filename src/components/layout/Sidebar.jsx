@@ -18,11 +18,16 @@ import BarChartRoundedIcon from '@mui/icons-material/BarChartRounded';
 import StorefrontRoundedIcon from '@mui/icons-material/StorefrontRounded';
 import useAuth from '../../hooks/useAuth';
 
+import MyLocationRoundedIcon from '@mui/icons-material/MyLocationRounded';
+
+
+
 const ANCHO_DRAWER = 240;
 
 const ITEMS_MENU = [
-  { texto: 'Panel', ruta: '/', icono: DashboardRoundedIcon, roles: ['ADMIN', 'DESPACHADOR', 'CLIENTE', 'RECEPCIONISTA'] },
+  { texto: 'Panel', ruta: '/panel', icono: DashboardRoundedIcon, roles: ['ADMIN', 'DESPACHADOR', 'CLIENTE', 'RECEPCIONISTA'] },
   { texto: 'Mostrador', ruta: '/mostrador', icono: StorefrontRoundedIcon, roles: ['RECEPCIONISTA', 'ADMIN'] },
+  { texto: 'Modo conductor', ruta: '/modo-conductor', icono: MyLocationRoundedIcon, roles: ['DESPACHADOR', 'ADMIN'] },
   { texto: 'Vehículos', ruta: '/vehiculos', icono: LocalShippingRoundedIcon, roles: ['ADMIN', 'DESPACHADOR'] },
   { texto: 'Rutas', ruta: '/rutas', icono: RouteRoundedIcon, roles: ['ADMIN', 'DESPACHADOR'] },
   { texto: 'Envíos', ruta: '/envios', icono: Inventory2RoundedIcon, roles: ['ADMIN', 'DESPACHADOR', 'CLIENTE', 'RECEPCIONISTA'] },
@@ -61,7 +66,7 @@ export default function Sidebar() {
               key={ruta}
               component={NavLink}
               to={ruta}
-              end={ruta === '/'}
+              end={ruta === '/panel'}
               sx={{
                 borderRadius: 2,
                 color: 'rgba(255,255,255,0.75)',

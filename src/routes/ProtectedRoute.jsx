@@ -22,7 +22,7 @@ export default function ProtectedRoute({ rolesPermitidos }) {
   }
 
   if (rolesPermitidos && !rolesPermitidos.includes(usuario.rol)) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/panel" replace />;
   }
 
   return <Outlet />;

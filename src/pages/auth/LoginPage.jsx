@@ -18,7 +18,7 @@ export default function LoginPage() {
     setEnviando(true);
     try {
       await login(email, password);
-      navigate('/', { replace: true });
+      navigate('/panel', { replace: true });
     } catch (err) {
       setError(extraerMensajeError(err, 'Credenciales inválidas. Verifica tu email y contraseña.'));
     } finally {

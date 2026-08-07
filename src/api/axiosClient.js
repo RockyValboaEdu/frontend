@@ -6,7 +6,10 @@ import axios from 'axios';
  * automaticamente a cada peticion. Ningun componente debe crear su propia
  * instancia de axios ni leer el token manualmente.
  */
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL !== undefined
+    ? import.meta.env.VITE_API_BASE_URL
+    : 'http://localhost:8080';
 
 const axiosClient = axios.create({
   baseURL: API_BASE_URL,

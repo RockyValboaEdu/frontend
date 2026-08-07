@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from '../components/layout/AppLayout';
 import ProtectedRoute from './ProtectedRoute';
+import LandingPage from '../pages/public/LandingPage';
 import LoginPage from '../pages/auth/LoginPage';
 import RegistroPage from '../pages/auth/RegistroPage';
 import DashboardPage from '../pages/dashboard/DashboardPage';
@@ -12,22 +13,29 @@ import UsuariosPage from '../pages/admin/UsuariosPage';
 import ReportesPage from '../pages/admin/ReportesPage';
 import RegistrarEnvioPresencialPage from '../pages/mostrador/RegistrarEnvioPresencialPage';
 import NotFoundPage from '../pages/NotFoundPage';
+import ModoConductorPage from '../pages/gps/ModoConductorPage';
 
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* Publicas: no requieren sesion */}
+      <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registro" element={<RegistroPage />} />
 
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
-          <Route path="/" element={<DashboardPage />} />
+          <Route path="/panel" element={<DashboardPage />} />
           <Route path="/envios" element={<EnviosPage />} />
           <Route path="/envios/:id" element={<EnvioDetallePage />} />
 
           <Route element={<ProtectedRoute rolesPermitidos={['ADMIN', 'DESPACHADOR']} />}>
             <Route path="/vehiculos" element={<VehiculosPage />} />
             <Route path="/rutas" element={<RutasPage />} />
+          </Route>
+
+          <Route element={<ProtectedRoute rolesPermitidos={['DESPACHADOR', 'ADMIN']} />}>
+            <Route path="/modo-conductor" element={<ModoConductorPage />} />
           </Route>
 
           <Route element={<ProtectedRoute rolesPermitidos={['ADMIN', 'RECEPCIONISTA']} />}>

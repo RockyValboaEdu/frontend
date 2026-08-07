@@ -25,7 +25,7 @@ export default function RegistroPage() {
     setEnviando(true);
     try {
       await registrar(form);
-      navigate('/', { replace: true });
+      navigate('/panel', { replace: true });
     } catch (err) {
       setError(extraerMensajeError(err, 'No se pudo completar el registro.'));
     } finally {

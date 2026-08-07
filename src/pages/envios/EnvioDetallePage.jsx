@@ -22,6 +22,8 @@ import useSeguimiento from '../../hooks/useSeguimiento';
 import useAuth from '../../hooks/useAuth';
 import extraerMensajeError from '../../utils/extraerMensajeError';
 
+import MapaSeguimiento from '../../components/common/MapaSeguimiento';
+
 const ESTADOS_SIGUIENTES = ['ASIGNADO', 'EN_RUTA', 'ENTREGADO', 'FALLIDO'];
 
 export default function EnvioDetallePage() {
@@ -40,6 +42,11 @@ export default function EnvioDetallePage() {
 
   // Se conecta por WebSocket al topico de este envio en particular
   const eventoEnVivo = useSeguimiento(id);
+
+  const ultimaUbicacion =
+    eventoEnVivo?.latitud != null
+      ? eventoEnVivo
+      : [...historial].reverse().find((e) => e.latitud != null);
 
   const cargarDatos = async () => {
     const [datosEnvio, datosHistorial] = await Promise.all([
@@ -179,6 +186,17 @@ export default function EnvioDetallePage() {
               variant="outlined"
             />
           </Stack>
+
+          <Paper elevation={0} sx={{ p: 3, border: '1px solid #E4E7EC', flex: 1 }}>
+            <Typography variant="h6" sx={{ mb: 2 }}>
+              Ubicación en el mapa
+            </Typography>
+            <MapaSeguimiento
+              latitud={ultimaUbicacion?.latitud}
+              longitud={ultimaUbicacion?.longitud}
+              etiqueta={envio.codigoSeguimiento}
+            />
+          </Paper>
 
           {historial.length === 0 ? (
             <Typography variant="body2" color="text.secondary">

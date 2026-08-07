@@ -4,6 +4,8 @@ import theme from './theme/theme';
 import { AuthProvider } from './context/AuthContext';
 import AppRoutes from './routes/AppRoutes';
 
+import 'leaflet/dist/leaflet.css';
+
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
