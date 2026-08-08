@@ -39,9 +39,10 @@ export default function LoginPage() {
     }, 4000);
 
     try {
-      // ... tu lógica de login existente
+      await login(email, password);
+      navigate('/panel', { replace: true });
     } catch (err) {
-      setError(extraerMensajeError(err, 'No se pudo iniciar sesión.'));
+      setError(extraerMensajeError(err, 'Credenciales inválidas. Verifica tu email y contraseña.'));
     } finally {
       clearTimeout(avisoDemora);
       setMensajeEspera('');
@@ -104,6 +105,12 @@ export default function LoginPage() {
           {error && (
             <Alert severity="error" sx={{ mb: 2 }}>
               {error}
+            </Alert>
+          )}
+
+          {mensajeEspera && (
+            <Alert severity="info" sx={{ mb: 2 }}>
+              {mensajeEspera}
             </Alert>
           )}
 
