@@ -26,6 +26,29 @@ export default function LoginPage() {
     }
   };
 
+  const [mensajeEspera, setMensajeEspera] = useState('');
+
+  const iniciarSesion = async (e) => {
+    e.preventDefault();
+    setError('');
+    setEnviando(true);
+
+    // Si a los 4 segundos sigue sin responder, probablemente el backend está "despertando"
+    const avisoDemora = setTimeout(() => {
+      setMensajeEspera('El servidor estaba inactivo y está despertando, puede tardar hasta un minuto...');
+    }, 4000);
+
+    try {
+      // ... tu lógica de login existente
+    } catch (err) {
+      setError(extraerMensajeError(err, 'No se pudo iniciar sesión.'));
+    } finally {
+      clearTimeout(avisoDemora);
+      setMensajeEspera('');
+      setEnviando(false);
+    }
+  };
+
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       {/* Panel de marca */}
