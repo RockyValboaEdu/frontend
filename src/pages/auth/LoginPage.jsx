@@ -114,7 +114,7 @@ export default function LoginPage() {
             </Alert>
           )}
 
-          <Box component="form" onSubmit={handleSubmit}>
+          <Box component="form" onSubmit={iniciarSesion}>
             <Stack spacing={2}>
               <TextField
                 label="Email"
